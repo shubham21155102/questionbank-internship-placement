@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Response</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='response.css') }}">
+</head>
+<body>
+    <h1>Thank you for your submission!</h1>
+    <p>Company Name:{{companyname}}</p>
+    <p>Exam Type:{{examtype}}</p>
+    <p>Question Type:{{questionname}}</p>
+    <p>Question Link:{{questionlink}}</p>
+    <p>Year:{{year}}</p>
+</body>
+</html>

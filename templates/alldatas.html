@@ -1,0 +1,75 @@
+<!-- alldatas.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>All Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='alldatas.css') }}">
+    <script>
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("data-table");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                rows = table.getElementsByTagName("tr");
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>All Data</h1>
+    <div>
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select" onchange="sortTable(this.value)">
+            <option value="0">Company Name</option>
+            <option value="1">Exam Type</option>
+            <option value="2">Question Name</option>
+            <option value="4">Year</option>
+        </select>
+    </div>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Exam Type</th>
+                <th>Question Name</th>
+                <th>Question Link</th>
+                <th>Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td><a href="{{ row[3] }}" target="_blank">{{ row[3] }}</a></td>
+                <td>{{ row[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</body>
+
+</html>
